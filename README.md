@@ -150,7 +150,9 @@ Class hierarchy can be further studied in the doxygen docs [here](https://clang.
 
 
 + ### Polymorphism
-    C++ supports polymorphism its act of representing same operation in different manner its particularly usefull when derived classes need to implement a particular function in different manner.Polymorphism is of 2 kinds :
+    C++ supports polymorphism its act of providing same interface with different functionalities Ex:when derived classes need to implement a function in different manner, interface provides virtual functions.
+    
+    Polymorphism is of 2 kinds :
 
     + Compile time: can be achieved by function or operator overloading
     + Runtime : can be achieved by using virtual functions
