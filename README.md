@@ -1,5 +1,9 @@
 # LLVM/Clang
 ## An analysis of interesting c++ features that have been used in LLVM/Clang codebase.
+
+LLVM is a compiler infrastructure providing a collection reusable compiler and toolchain technologies.
+Clang is an LLVM compiler for  C/C++/Objective-C source code, which aims to deliver amazingly fast compiles, extremely useful error and warning messages and to provide a platform for building great source level tools.
+
 I have tried to read several .cpp and .h files from the clang [codebase](https://github.com/llvm/llvm-project/tree/main/clang) from llvm-project as well as doxygen [docs](https://clang.llvm.org/doxygen) which itself was an interesting read as i got introduced to [doxygen](https://www.doxygen.nl/index.html) a documentation generating tool and here are my findings:
 
 ## C++ features
@@ -20,6 +24,7 @@ I have tried to read several .cpp and .h files from the clang [codebase](https:/
                 return nullptr;
             } 
         ```
+        The above example also demonstrate the usage of range for loop another new feature in c++11 where a list or container elements can be iterated in a very convinient and readable way
 + ### Inline-Functions
 
     C++ provides inline functions which provide a less expensive (no function call overhead) way of implementing a small function inline its used at many places in clang some of which are mentioned below:
@@ -139,7 +144,7 @@ Class hierarchy can be further studied in the doxygen docs [here](https://clang.
     ------------- | -------------
     public   | Everywhere
     private  | class where declared
-    protected  | class where declared+inheriting classes
+    protected  | class where declared+inheriting classes+friend classes
 
     These access specifiers are aptly used in class designs in various header files in clang codebase.
 
@@ -171,10 +176,15 @@ Class hierarchy can be further studied in the doxygen docs [here](https://clang.
         + [virtual void IndirectLex(Token& Result) = 0](https://github.com/llvm/llvm-project/blob/ea069aebccd317f350be3cabdcd848476616d4da/clang/include/clang/Lex/PreprocessorLexer.h#L79)
         + [virtual SourceLocation getSourceLocation() = 0](https://github.com/llvm/llvm-project/blob/ea069aebccd317f350be3cabdcd848476616d4da/clang/include/clang/Lex/PreprocessorLexer.h#L84)
     
-## [Iterators](https://www.cplusplus.com/reference/iterator/)
+## Iterators
 
-    In c++ iterators are abject pointing to elements in an array or container(vector,list,map etc), some instances of usage of iterators in clang codebase are mentioned below:
+In c++ [iterators](https://www.cplusplus.com/reference/iterator/) are abject pointing to elements in an array or container(vector,list,map etc), some instances of usage of iterators in clang codebase are mentioned below:
 
+These functions returns the iterators returned from begin() and end() members
++ [iterator begin() { return FunctionMap.begin();}](https://github.com/llvm/llvm-project/blob/main/clang/include/clang/Analysis/CallGraph.h#L86)
++ [iterator end() { return FunctionMap.end();}](https://github.com/llvm/llvm-project/blob/main/clang/include/clang/Analysis/CallGraph.h#L87)
+
+Iterators are primarily used in for loops for iterating over a container.
 
 ## Design Patterns
 
@@ -207,15 +217,18 @@ Class hierarchy can be further studied in the doxygen docs [here](https://clang.
 
 ## References
 
++ https://llvm.org/
 + https://clang.llvm.org/doxygen
 + https://en.wikipedia.org/wiki/Factory_method_pattern
 + https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern
 + https://clang.llvm.org/doxygen/inherits.html
 + https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-160#:~:text=A%20lambda%20can%20introduce%20new,by%20value%20or%20by%20reference.
++ https://docs.microsoft.com/en-us/cpp/standard-library/iterators?view=msvc-160
+
 
 
 ## Author
-## Kushagra Indurkhya
+## [Kushagra Indurkhya](https://github.com/KushagraIndurkhya)
 ## CS19B1017
 
 
